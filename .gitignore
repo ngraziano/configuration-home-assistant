@@ -1,0 +1,9 @@
+private/
+secrets.yaml
+bravia.conf
+deps/
+known_devices.yaml
+*.db
+*.log
+*.swp
+.HA_VERSION

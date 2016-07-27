@@ -1,0 +1,223 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Maison
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # C for Celsius, F for Fahrenheit
+  temperature_unit: C
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Paris
+
+# Discover some devices automatically
+# discovery:
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Checks for available updates
+updater:
+
+# View all events in a logbook
+logbook:
+
+# Prediction of weather
+sensor:
+  - platform: yr
+
+  - platform: mqtt
+    state_topic: "freebox/synchro"
+    name: "Synchro freebox down"
+    value_template: '{{ value_json.down }}'
+    unit_of_measurement: "b/s"
+
+  - platform: mqtt
+    state_topic: "freebox/synchro"
+    name: "Synchro freebox up"
+    value_template: '{{ value_json.up }}'
+    unit_of_measurement: "b/s"
+
+  - platform: mqtt
+    state_topic: "heating/outside/temperature"
+    name: "Temperature exterieure"
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "heating/zone-a/temperature"
+    name: "Temperature interieure"
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "heating/boiler/temperature"
+    name: "Temperature depart"
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "heating/boiler/return-temperature"
+    name: "Temperature retour"
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "heating/boiler/start-count"
+    name: "Nombre de demarage"
+    unit_of_measurement: "x"
+
+  - platform: mqtt
+    state_topic: "heating/boiler/hours-count"
+    name: "Heures de fonctionement"
+    unit_of_measurement: "h"
+
+  - platform: mqtt
+    state_topic: "heating/boiler/calculated-temperature"
+    name: "Temperature calculee chaudiere"
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "heating/zone-a/calculated-temperature"
+    name: "Temperature calculee interieur"
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "heating/zone-a/day-target-temperature"
+    name: "Temperature cible jour"
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "heating/zone-a/night-target-temperature"
+    name: "Temperature cible nuit"
+    unit_of_measurement: "°C"
+
+  - platform: mqtt
+    state_topic: "heating/boiler/pressure"
+    name: "Pression circuit chauffage"
+    unit_of_measurement: "Bar"
+
+
+switch:
+  - platform: mqtt
+    name: "Chaudiere Program P1"
+    state_topic: "heating/zone-a/program/P1"
+    command_topic: "heating/zone-a/program/P1/SET"
+  - platform: mqtt
+    name: "Chaudiere Program P2"
+    state_topic: "heating/zone-a/program/P2"
+    command_topic: "heating/zone-a/program/P2/SET"
+  - platform: mqtt
+    name: "Chaudiere Program P3"
+    state_topic: "heating/zone-a/program/P3"
+    command_topic: "heating/zone-a/program/P3/SET"
+  - platform: mqtt
+    name: "Chaudiere Program P4"
+    state_topic: "heating/zone-a/program/P4"
+    command_topic: "heating/zone-a/program/P4/SET"
+
+input_slider:
+  slidertemp1:
+    name: Slider temps jour
+    initial: 10.0
+    min: 5.0
+    max: 25.0
+    step: 0.5
+
+automation:
+  - alias: "Recup day target"
+    trigger:
+      platform: mqtt
+      topic: "heating/zone-a/day-target-temperature"
+    action:
+      service: input_slider.select_value
+      entity_id: input_slider.slidertemp1
+      data_template:
+        value: "{{ trigger.payload }}"
+  - alias: "Send day target"
+    trigger:
+      platform: state
+      entity_id: input_slider.slidertemp1
+    action:
+      service: mqtt.publish
+      data_template:
+        topic: "heating/zone-a/day-target-temperature/SET"
+        payload: "{{  states.input_slider.slidertemp1.state }}"
+
+media_player:
+  platform: braviatv
+  host: 192.168.0.205
+  name: TV Salon
+
+
+camera:
+  platform: generic
+  still_image_url: !secret camera_url
+  name: Camera de test
+  username: !secret camera_user 
+  password: !secret camera_password 
+
+
+group:
+  default_view:
+    entities:
+      - group.general
+      - group.thermostat
+  general:
+    entities:
+      - sun.sun
+      - sensor.yr_symbol
+      - sensor.temperature_exterieure
+      - sensor.temperature_interieure
+      - media_player.tv_salon
+      - configurator.tv_salon
+  chaudiere:
+#    view: yes
+    entities:
+      - sensor.temperature_retour
+      - sensor.temperature_depart
+      - sensor.temperature_interieure
+      - sensor.heures_de_fonctionement
+      - sensor.nombre_de_demarage
+      - sensor.temperature_calculee_chaudiere
+      - sensor.temperature_calculee_interieur
+      - sensor.pression_circuit_chauffage
+  thermostat:
+    entities:
+      - sensor.temperature_cible_jour
+      - input_slider.slidertemp1
+      - sensor.temperature_cible_nuit
+      - switch.chaudiere_program_p1
+      - switch.chaudiere_program_p2
+      - switch.chaudiere_program_p3
+      - switch.chaudiere_program_p4
+  internet:
+    entities:
+      - sensor.synchro_freebox_up
+      - sensor.synchro_freebox_down
+  technique:
+    view: yes
+    entities:
+      - group.chaudiere
+      - group.internet
+  divers:
+    view: yes
+    entities:
+      - camera.camera_de_test
+
+
+# Track the sun
+sun:
+
+# Enables support for tracking state changes over time.
+history:
+
+# Enables the frontend
+frontend:
+
+# Allows you to issue voice commands from the frontend
+conversation:
+
+device_tracker:
+  platform: owntracks
+  max_gps_accuracy: 200
+
+http: !include private/http.yaml
+
+mqtt: !include private/mqtt.yaml
+
