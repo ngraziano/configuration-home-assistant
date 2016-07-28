@@ -1,0 +1,15 @@
+
+# Freebox info
+
+- platform: mqtt
+  state_topic: "freebox/synchro"
+  name: "Synchro freebox down"
+  value_template: '{{ value_json.down }}'
+  unit_of_measurement: "b/s"
+
+- platform: mqtt
+  state_topic: "freebox/synchro"
+  name: "Synchro freebox up"
+  value_template: '{{ value_json.up }}'
+  unit_of_measurement: "b/s"
+
