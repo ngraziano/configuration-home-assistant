@@ -1,5 +1,6 @@
-name: Slider temps jour
+name: Consigne temp. jour
 initial: 10.0
 min: 5.0
 max: 25.0
 step: 0.5
+icon: mdi:temperature-celsius

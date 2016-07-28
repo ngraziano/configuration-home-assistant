@@ -28,6 +28,15 @@ switch: !include_dir_merge_list switch/
 
 input_slider: !include_dir_named input_slider/
 
+input_select:
+  therm_program:
+    name: Programme
+    options:
+      - P1
+      - P2
+      - P3
+      - P4
+
 automation: !include_dir_merge_list automation/
 
 media_player:
@@ -69,6 +78,7 @@ group:
       - sensor.pression_circuit_chauffage
   thermostat:
     entities:
+      - input_select.therm_program
       - sensor.temperature_cible_jour
       - input_slider.target_temp_day
       - sensor.temperature_cible_nuit
@@ -86,6 +96,7 @@ group:
     entities:
       - group.chaudiere
       - group.internet
+      - updater.updater
   divers:
     view: yes
     entities:

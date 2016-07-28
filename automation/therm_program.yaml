@@ -1,0 +1,23 @@
+- alias: "Recup current program"
+  trigger:
+    platform: mqtt
+    topic: "heating/zone-a/program"
+  action:
+    service: input_select.select_option
+    entity_id: input_select.therm_program
+    data_template:
+      option: "{{ states.input_select.therm_program.attributes.options[trigger.payload|int] }}"
+- alias: "Send day target"
+  trigger:
+    platform: state
+    entity_id: input_select.therm_program
+  action:
+    service: mqtt.publish
+    data_template:
+      topic: "heating/zone-a/program/SET"
+      payload: "{% for opt in states.input_select.therm_program.attributes.options -%}
+                  {%- if opt==states.input_select.therm_program.state -%}
+                    {{loop.index-1}}
+                  {%- endif -%}
+                {%- endfor %}"
+
