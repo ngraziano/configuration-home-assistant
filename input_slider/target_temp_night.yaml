@@ -1,0 +1,5 @@
+name: Consigne temps. nuit
+initial: 10.0
+min: 5.0
+max: 25.0
+step: 0.5

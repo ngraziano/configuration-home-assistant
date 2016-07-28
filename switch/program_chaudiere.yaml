@@ -1,0 +1,17 @@
+- platform: mqtt
+  name: "Chaudiere Program P1"
+  state_topic: "heating/zone-a/program/P1"
+  command_topic: "heating/zone-a/program/P1/SET"
+- platform: mqtt
+  name: "Chaudiere Program P2"
+  state_topic: "heating/zone-a/program/P2"
+  command_topic: "heating/zone-a/program/P2/SET"
+- platform: mqtt
+  name: "Chaudiere Program P3"
+  state_topic: "heating/zone-a/program/P3"
+  command_topic: "heating/zone-a/program/P3/SET"
+- platform: mqtt
+  name: "Chaudiere Program P4"
+  state_topic: "heating/zone-a/program/P4"
+  command_topic: "heating/zone-a/program/P4/SET"
+

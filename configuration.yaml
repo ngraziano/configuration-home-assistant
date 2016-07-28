@@ -24,57 +24,16 @@ logbook:
 # Prediction of weather
 sensor: !include_dir_merge_list sensor/
 
-switch:
-  - platform: mqtt
-    name: "Chaudiere Program P1"
-    state_topic: "heating/zone-a/program/P1"
-    command_topic: "heating/zone-a/program/P1/SET"
-  - platform: mqtt
-    name: "Chaudiere Program P2"
-    state_topic: "heating/zone-a/program/P2"
-    command_topic: "heating/zone-a/program/P2/SET"
-  - platform: mqtt
-    name: "Chaudiere Program P3"
-    state_topic: "heating/zone-a/program/P3"
-    command_topic: "heating/zone-a/program/P3/SET"
-  - platform: mqtt
-    name: "Chaudiere Program P4"
-    state_topic: "heating/zone-a/program/P4"
-    command_topic: "heating/zone-a/program/P4/SET"
+switch: !include_dir_merge_list switch/
 
-input_slider:
-  slidertemp1:
-    name: Slider temps jour
-    initial: 10.0
-    min: 5.0
-    max: 25.0
-    step: 0.5
+input_slider: !include_dir_named input_slider/
 
-automation:
-  - alias: "Recup day target"
-    trigger:
-      platform: mqtt
-      topic: "heating/zone-a/day-target-temperature"
-    action:
-      service: input_slider.select_value
-      entity_id: input_slider.slidertemp1
-      data_template:
-        value: "{{ trigger.payload }}"
-  - alias: "Send day target"
-    trigger:
-      platform: state
-      entity_id: input_slider.slidertemp1
-    action:
-      service: mqtt.publish
-      data_template:
-        topic: "heating/zone-a/day-target-temperature/SET"
-        payload: "{{  states.input_slider.slidertemp1.state }}"
+automation: !include_dir_merge_list automation/
 
 media_player:
   platform: braviatv
   host: 192.168.0.205
   name: TV Salon
-
 
 camera:
   platform: generic
@@ -111,8 +70,9 @@ group:
   thermostat:
     entities:
       - sensor.temperature_cible_jour
-      - input_slider.slidertemp1
+      - input_slider.target_temp_day
       - sensor.temperature_cible_nuit
+      - input_slider.target_temp_night
       - switch.chaudiere_program_p1
       - switch.chaudiere_program_p2
       - switch.chaudiere_program_p3

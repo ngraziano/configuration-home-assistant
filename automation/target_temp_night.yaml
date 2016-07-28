@@ -1,0 +1,19 @@
+- alias: "Recup night target"
+  trigger:
+    platform: mqtt
+    topic: "heating/zone-a/night-target-temperature"
+  action:
+    service: input_slider.select_value
+    entity_id: input_slider.target_temp_night
+    data_template:
+      value: "{{ trigger.payload }}"
+- alias: "Send night target"
+  trigger:
+    platform: state
+    entity_id: input_slider.target_temp_night
+  action:
+    service: mqtt.publish
+    data_template:
+      topic: "heating/zone-a/night-target-temperature/SET"
+      payload: "{{  states.input_slider.target_temp_night.state }}"
+

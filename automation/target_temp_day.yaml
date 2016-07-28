@@ -1,0 +1,19 @@
+- alias: "Recup day target"
+  trigger:
+    platform: mqtt
+    topic: "heating/zone-a/day-target-temperature"
+  action:
+    service: input_slider.select_value
+    entity_id: input_slider.target_temp_day
+    data_template:
+      value: "{{ trigger.payload }}"
+- alias: "Send day target"
+  trigger:
+    platform: state
+    entity_id: input_slider.target_temp_day
+  action:
+    service: mqtt.publish
+    data_template:
+      topic: "heating/zone-a/day-target-temperature/SET"
+      payload: "{{  states.input_slider.target_temp_day.state }}"
+
