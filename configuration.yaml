@@ -28,14 +28,7 @@ switch: !include_dir_merge_list switch/
 
 input_slider: !include_dir_named input_slider/
 
-input_select:
-  therm_program:
-    name: Programme
-    options:
-      - P1
-      - P2
-      - P3
-      - P4
+input_select: !include_dir_named input_select/
 
 automation: !include_dir_merge_list automation/
 
@@ -79,6 +72,7 @@ group:
   thermostat:
     entities:
       - input_select.therm_program
+      - input_select.therm_mode
       - sensor.temperature_cible_jour
       - input_slider.target_temp_day
       - sensor.temperature_cible_nuit

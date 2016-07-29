@@ -1,0 +1,7 @@
+name: Mode
+options:
+  - Automatique
+  - Jour
+  - Nuit
+  - Vacances
+
