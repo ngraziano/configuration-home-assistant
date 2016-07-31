@@ -32,10 +32,10 @@ input_select: !include_dir_named input_select/
 
 automation: !include_dir_merge_list automation/
 
-media_player:
-  platform: braviatv
-  host: 192.168.0.205
-  name: TV Salon
+#media_player:
+#  platform: braviatv
+#  host: 192.168.0.205
+#  name: TV Salon
 
 camera:
   platform: generic
@@ -56,8 +56,8 @@ group:
       - sensor.yr_symbol
       - sensor.temperature_exterieure
       - sensor.temperature_interieure
-      - media_player.tv_salon
-      - configurator.tv_salon
+#      - media_player.tv_salon
+#      - configurator.tv_salon
   chaudiere:
 #    view: yes
     entities:
@@ -73,6 +73,7 @@ group:
     entities:
       - input_select.therm_program
       - input_select.therm_mode
+      - input_slider.days_away
       - sensor.temperature_cible_jour
       - input_slider.target_temp_day
       - sensor.temperature_cible_nuit
