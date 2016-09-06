@@ -1,0 +1,11 @@
+- alias: "connection with boiler lost"
+  trigger:
+    platform: mqtt
+    topic: "heating/reading"
+    payload: "OFF"
+  action:
+    service: notify.html5
+    data:
+      message: "Connexion perdu avec la chaudière"
+      title: "Chaudière"
+
