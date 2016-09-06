@@ -4,8 +4,8 @@ homeassistant:
   # Location required to calculate the time the sun rises and sets
   latitude: !secret latitude
   longitude: !secret longitude
-  # C for Celsius, F for Fahrenheit
-  temperature_unit: C
+  # 'metric' for the metric system, 'imperial' for the imperial system
+  unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Paris
 
@@ -44,6 +44,12 @@ camera:
   username: !secret camera_user 
   password: !secret camera_password 
 
+
+notify:
+  name: HTML5
+  platform: html5
+  gcm_api_key: !secret gcm_api_key
+  gcm_sender_id: !secret gcm_sender_id
 
 group:
   default_view:

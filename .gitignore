@@ -3,6 +3,7 @@ secrets.yaml
 bravia.conf
 deps/
 known_devices.yaml
+html5_push_registrations.conf
 *.db
 *.log
 *.swp
