@@ -54,12 +54,14 @@ notify:
 group:
   default_view:
     entities:
-      - group.general
-      - group.thermostat
-  general:
-    entities:
       - sun.sun
       - sensor.yr_symbol
+      - group.general
+      - group.thermostat
+      - zone.home
+      - device_tracker.nico_n7ot
+  general:
+    entities:
       - sensor.temperature_exterieure
       - sensor.temperature_interieure
 #      - media_player.tv_salon
@@ -123,4 +125,11 @@ device_tracker:
 http: !include private/http.yaml
 
 mqtt: !include private/mqtt.yaml
+
+influxdb:
+  host: 127.0.0.1
+  port: 8086
+  database: home_assistant
+  username: home-assistant
+  password: !secret influxdb_password
 
