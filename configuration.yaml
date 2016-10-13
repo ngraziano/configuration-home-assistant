@@ -21,6 +21,9 @@ updater:
 # View all events in a logbook
 logbook:
 
+recorder:
+  purge_days: 21
+
 # Prediction of weather
 sensor: !include_dir_merge_list sensor/
 
@@ -77,8 +80,12 @@ group:
       - sensor.temperature_calculee_chaudiere
       - sensor.temperature_calculee_interieur
       - sensor.pression_circuit_chauffage
+      - sensor.pompe
+      - sensor.puissance_bruleur
+      - sensor.vitesse_ventilateur
   thermostat:
     entities:
+      - sensor.mode_chauffage
       - input_select.therm_program
       - input_select.therm_mode
       - input_slider.days_away

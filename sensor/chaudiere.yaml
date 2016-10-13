@@ -53,3 +53,23 @@
   name: "Pression circuit chauffage"
   unit_of_measurement: "Bar"
 
+- platform: mqtt
+  state_topic: "heating/boiler/power-inst"
+  name: "Puissance bruleur"
+  unit_of_measurement: "%"
+
+- platform: mqtt
+  state_topic: "heating/boiler/fan-speed"
+  name: "Vitesse ventilateur"
+  unit_of_measurement: "rpm"
+
+- platform: mqtt
+  state_topic: "heating/zone-a/active-mode"
+  name: "Mode Chauffage"
+ 
+
+- platform: mqtt
+  state_topic: "heating/boiler/output-state"
+  name: "Pompe"
+  value_template: '{{ value_json.zone_A_pump }}'
+
