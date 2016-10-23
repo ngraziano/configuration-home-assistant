@@ -35,6 +35,14 @@ input_select: !include_dir_named input_select/
 
 automation: !include_dir_merge_list automation/
 
+binary_sensor:
+  - platform: mqtt
+    name: "EJP"
+    state_topic: "ejp/jourJ"
+    payload_on: "EJP"
+    payload_off: "NON_EJP"
+    sensor_class: "power"
+
 #media_player:
 #  platform: braviatv
 #  host: 192.168.0.205
@@ -63,10 +71,12 @@ group:
       - group.thermostat
       - zone.home
       - device_tracker.nico_n7ot
+      - binary_sensor.ejp
   general:
     entities:
       - sensor.temperature_exterieure
       - sensor.temperature_interieure
+      - binary_sensor.ejp
 #      - media_player.tv_salon
 #      - configurator.tv_salon
   chaudiere:
