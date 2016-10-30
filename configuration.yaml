@@ -4,6 +4,7 @@ homeassistant:
   # Location required to calculate the time the sun rises and sets
   latitude: !secret latitude
   longitude: !secret longitude
+  elevation: 285
   # 'metric' for the metric system, 'imperial' for the imperial system
   unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
@@ -39,14 +40,21 @@ binary_sensor:
   - platform: mqtt
     name: "EJP"
     state_topic: "ejp/jourJ"
-    payload_on: "EJP"
+    payload_on: "EST_EJP"
+    payload_off: "NON_EJP"
+    sensor_class: "power"
+  - platform: mqtt
+    name: "EJP lendemain"
+    state_topic: "ejp/jour1filtre"
+    payload_on: "EST_EJP"
     payload_off: "NON_EJP"
     sensor_class: "power"
 
-#media_player:
-#  platform: braviatv
-#  host: 192.168.0.205
-#  name: TV Salon
+
+media_player:
+  platform: braviatv
+  host: 192.168.0.205
+  name: TV Salon
 
 camera:
   platform: generic
@@ -77,8 +85,9 @@ group:
       - sensor.temperature_exterieure
       - sensor.temperature_interieure
       - binary_sensor.ejp
-#      - media_player.tv_salon
-#      - configurator.tv_salon
+      - binary_sensor.ejp_lendemain
+      - media_player.tv_salon
+      - configurator.tv_salon
   chaudiere:
 #    view: yes
     entities:
@@ -149,4 +158,14 @@ influxdb:
   database: home_assistant
   username: home-assistant
   password: !secret influxdb_password
+  blacklist:
+    - media_player.tv_salon
+    - group.all_devices
+    - group.all_switches
+    - group.default_view
+    - group.thermostat
+    - group.all_automations
+    - input_select.therm_program
+    - input_select.therm_mode
+    
 
