@@ -1,0 +1,11 @@
+- alias: "EJP next day"
+  trigger:
+    platform: mqtt
+    topic: "ejp/jour1"
+    payload: "EST_EJP"
+  action:
+    service: notify.html5
+    data:
+      message: "Demain est un jour EJP"
+      title: "EJP"
+

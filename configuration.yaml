@@ -55,6 +55,7 @@ media_player:
   platform: braviatv
   host: 192.168.0.205
   name: TV Salon
+#  scan_interval: 60
 
 camera:
   platform: generic
@@ -164,7 +165,10 @@ influxdb:
     - group.all_switches
     - group.default_view
     - group.thermostat
+    - group.general
     - group.all_automations
+    - automation.recup_night_target
+    - automation.recup_day_target
     - input_select.therm_program
     - input_select.therm_mode
     
