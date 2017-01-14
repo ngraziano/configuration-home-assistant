@@ -49,6 +49,11 @@ binary_sensor:
     payload_on: "EST_EJP"
     payload_off: "NON_EJP"
     sensor_class: "power"
+  - platform: mqtt
+    name: "Lave Linge"
+    state_topic: "divers/lave-linge"
+    payload_on: "ON"
+    payload_off: "OFF"
 
 
 media_player:
@@ -87,6 +92,7 @@ group:
       - sensor.temperature_interieure
       - binary_sensor.ejp
       - binary_sensor.ejp_lendemain
+      - binary_sensor.lave_linge
       - media_player.tv_salon
       - configurator.tv_salon
   chaudiere:
