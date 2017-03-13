@@ -42,13 +42,13 @@ binary_sensor:
     state_topic: "ejp/jourJ"
     payload_on: "EST_EJP"
     payload_off: "NON_EJP"
-    sensor_class: "power"
+    device_class: "power"
   - platform: mqtt
     name: "EJP lendemain"
     state_topic: "ejp/jour1filtre"
     payload_on: "EST_EJP"
     payload_off: "NON_EJP"
-    sensor_class: "power"
+    device_class: "power"
   - platform: mqtt
     name: "Lave Linge"
     state_topic: "divers/lave-linge"
@@ -170,7 +170,7 @@ influxdb:
   host: 127.0.0.1
   port: 8086
   database: home_assistant
-  username: home-assistant
+  username: nico 
   password: !secret influxdb_password
   blacklist:
     - media_player.tv_salon
