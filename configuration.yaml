@@ -55,6 +55,11 @@ binary_sensor:
     payload_on: "ON"
     payload_off: "OFF"
 
+input_boolean:
+  notify_home:
+    name: A la maison
+    initial: off
+    icon: mdi:car
 
 media_player:
   platform: braviatv
@@ -137,6 +142,8 @@ group:
     view: yes
     entities:
       - camera.camera_de_test
+      - input_boolean.notify_home
+
 
 
 # Track the sun
@@ -178,4 +185,16 @@ influxdb:
     - input_select.therm_program
     - input_select.therm_mode
     
+microsoft_face:
+  api_key: !secret cognitive_api_key
+
+image_processing:
+ - scan_interval: 120
+   platform: microsoft_face_identify
+   name: "Test"
+   friendly_name: "Test2"
+   group: prive
+   source:
+    - entity_id: camera.camera_de_test
+
 

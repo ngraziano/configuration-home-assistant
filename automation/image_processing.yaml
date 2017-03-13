@@ -1,0 +1,12 @@
+- alias: "A la maison"
+  trigger:
+    platform: event
+    event_type: identify_face
+    event_data:
+      entity_id: image_processing.microsoftface_camera_de_test
+      name: 'moi'
+  action:
+    service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.notify_home
+

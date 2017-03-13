@@ -1,8 +1,9 @@
 - alias: "end of wash"
   trigger:
-    platform: mqtt
-    topic: "divers/lave-linge"
-    payload: "OFF"
+    platform: state
+    entity_id: binary_sensor.lave_linge
+    from: 'on'
+    to: 'off'
   action:
     service: notify.html5
     data:

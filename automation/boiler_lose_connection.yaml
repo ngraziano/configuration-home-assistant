@@ -1,7 +1,7 @@
 - alias: "connection with boiler lost"
   trigger:
     platform: mqtt
-    topic: "heating/reading"
+    topic: "heating/reading-lost"
     payload: "OFF"
   action:
     service: notify.html5
