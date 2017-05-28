@@ -83,6 +83,7 @@ notify:
 
 group:
   default_view:
+    view: yes
     entities:
       - sun.sun
       - sensor.yr_symbol
@@ -172,18 +173,19 @@ influxdb:
   database: home_assistant
   username: nico 
   password: !secret influxdb_password
-  blacklist:
-    - media_player.tv_salon
-    - group.all_devices
-    - group.all_switches
-    - group.default_view
-    - group.thermostat
-    - group.general
-    - group.all_automations
-    - automation.recup_night_target
-    - automation.recup_day_target
-    - input_select.therm_program
-    - input_select.therm_mode
+  exclude:
+    entities:
+      - media_player.tv_salon
+      - group.all_devices
+      - group.all_switches
+      - group.default_view
+      - group.thermostat
+      - group.general
+      - group.all_automations
+      - automation.recup_night_target
+      - automation.recup_day_target
+      - input_select.therm_program
+      - input_select.therm_mode
     
 microsoft_face:
   api_key: !secret cognitive_api_key
