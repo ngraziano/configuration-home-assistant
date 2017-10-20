@@ -3,17 +3,17 @@
     platform: mqtt
     topic: "heating/zone-a/antifreeze-duration"
   action:
-    service: input_slider.select_value
-    entity_id: input_slider.days_away
+    service: input_number.set_value
+    entity_id: input_number.days_away
     data_template:
       value: "{{ trigger.payload }}"
 - alias: "Send day away"
   trigger:
     platform: state
-    entity_id: input_slider.days_away
+    entity_id: input_number.days_away
   action:
     service: mqtt.publish
     data_template:
       topic: "heating/zone-a/antifreeze-duration/SET"
-      payload: "{{  states.input_slider.days_away.state |int }}"
+      payload: "{{  states.input_number.days_away.state |int }}"
 

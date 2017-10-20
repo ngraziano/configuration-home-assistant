@@ -18,19 +18,21 @@ homeassistant:
 
 # Checks for available updates
 updater:
+  include_used_components: true
 
 # View all events in a logbook
 logbook:
 
 recorder:
-  purge_days: 21
+  purge_interval: 5
+  purge_keep_days: 70
 
 # Prediction of weather
 sensor: !include_dir_merge_list sensor/
 
 switch: !include_dir_merge_list switch/
 
-input_slider: !include_dir_named input_slider/
+input_number: !include_dir_named input_number/
 
 input_select: !include_dir_named input_select/
 
@@ -102,6 +104,7 @@ group:
       - media_player.tv_salon
       - configurator.tv_salon
   chaudiere:
+    control: hidden
 #    view: yes
     entities:
       - sensor.temperature_retour
@@ -116,15 +119,16 @@ group:
       - sensor.puissance_bruleur
       - sensor.vitesse_ventilateur
   thermostat:
+    control: hidden
     entities:
       - sensor.mode_chauffage
       - input_select.therm_program
       - input_select.therm_mode
-      - input_slider.days_away
+      - input_number.days_away
       - sensor.temperature_cible_jour
-      - input_slider.target_temp_day
+      - input_number.target_temp_day
       - sensor.temperature_cible_nuit
-      - input_slider.target_temp_night
+      - input_number.target_temp_night
       - switch.chaudiere_program_p1
       - switch.chaudiere_program_p2
       - switch.chaudiere_program_p3
@@ -133,12 +137,21 @@ group:
     entities:
       - sensor.synchro_freebox_up
       - sensor.synchro_freebox_down
+  temperature3D:
+    name: Températures
+    entities:
+      - sensor.temperature_extrudeur
+      - sensor.temperature_garage
   technique:
     view: yes
     entities:
       - group.chaudiere
       - group.internet
       - updater.updater
+  imprimante3D:
+    view: yes
+    entities:
+      - group.temperature3D
   divers:
     view: yes
     entities:
@@ -187,16 +200,16 @@ influxdb:
       - input_select.therm_program
       - input_select.therm_mode
     
-microsoft_face:
-  api_key: !secret cognitive_api_key
+# microsoft_face:
+#   api_key: !secret cognitive_api_key
 
-image_processing:
- - scan_interval: 120
-   platform: microsoft_face_identify
-   name: "Test"
-   friendly_name: "Test2"
-   group: prive
-   source:
-    - entity_id: camera.camera_de_test
+# image_processing:
+#  - scan_interval: 120
+#    platform: microsoft_face_identify
+#    name: "Test"
+#    friendly_name: "Test2"
+#    group: prive
+#    source:
+#     - entity_id: camera.camera_de_test
 
 

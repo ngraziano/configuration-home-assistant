@@ -1,0 +1,17 @@
+
+# Freebox info
+
+- platform: mqtt
+  state_topic: "octoprint/temperature/tool0"
+  name: "Temperature Extrudeur"
+  value_template: '{{ value_json.actual }}'
+  unit_of_measurement: "°C"
+
+- platform: mqtt
+  state_topic: "octoprint/temperature/ext"
+  name: "Temperature Garage"
+  value_template: '{{ value_json.actual }}'
+  unit_of_measurement: "°C"
+
+
+
