@@ -10,6 +10,8 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Paris
 
+  customize: !include_dir_merge_named customize
+
 # Discover some devices automatically
 # discovery:
 
@@ -38,6 +40,8 @@ input_select: !include_dir_named input_select/
 
 automation: !include_dir_merge_list automation/
 
+script: !include_dir_named script/
+
 binary_sensor:
   - platform: mqtt
     name: "EJP"
@@ -56,6 +60,21 @@ binary_sensor:
     state_topic: "divers/lave-linge"
     payload_on: "ON"
     payload_off: "OFF"
+  - platform: mqtt
+    name: "Porte chambre"
+    state_topic: "zwave/node/7/user/Door_Window Sensor"
+    value_template: '{{value_json.value}}'
+    payload_on: true
+    payload_off: false
+    device_class: opening
+  - platform: mqtt
+    name: "Mouvement chambre"
+    state_topic: "zwave/node/7/user/Motion Sensor"
+    value_template: '{{value_json.value}}'
+    payload_on: true
+    payload_off: false
+    device_class: motion
+
 
 input_boolean:
   notify_home:
@@ -142,12 +161,19 @@ group:
     entities:
       - sensor.temperature_extrudeur
       - sensor.temperature_garage
+  ozwbattery:
+    name: Batterie ZWave
+    entities:
+      - sensor.n7battery_level
+      - sensor.n9battery_level
+      - sensor.n12battery_level
   technique:
     view: yes
     entities:
       - group.chaudiere
       - group.internet
       - updater.updater
+      - group.ozwbattery
   imprimante3D:
     view: yes
     entities:
@@ -157,6 +183,30 @@ group:
     entities:
       - camera.camera_de_test
       - input_boolean.notify_home
+  guirlande:
+    control: hidden
+    entities:
+      - script.red_light_strip
+      - script.stop_light_strip 
+  capteurchambre:
+    control: hidden
+    name: capteurs
+    entities:
+      - sensor.luminosite_chambre
+      - sensor.temperature_chambre
+      - binary_sensor.mouvement_chambre
+      - binary_sensor.porte_chambre
+  chambre:
+    view: yes
+    entities:
+      - group.guirlande
+      - group.capteurchambre
+  system:
+    view: yes
+    control: hidden
+    entities:
+      - group.all_automations
+      - group.all_devices
 
 
 
@@ -181,8 +231,10 @@ http: !include private/http.yaml
 mqtt: !include private/mqtt.yaml
 
 influxdb:
-  host: 127.0.0.1
-  port: 8086
+  host: influxdb.grazy.ovh
+  port: 443
+  ssl: true
+  verify_ssl: true
   database: home_assistant
   username: nico 
   password: !secret influxdb_password
@@ -199,6 +251,17 @@ influxdb:
       - automation.recup_day_target
       - input_select.therm_program
       - input_select.therm_mode
+
+
+google_assistant:
+  project_id: home-assistant-push-gzo
+  client_id: !secret google_assistant_client_id
+  access_token: !secret google_assistant_access_token
+  exposed_domains:
+    - switch
+    - light
+    - script
+#    - group
     
 # microsoft_face:
 #   api_key: !secret cognitive_api_key

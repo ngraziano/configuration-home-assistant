@@ -1,0 +1,12 @@
+alias: Defilement rouge guirlande
+sequence:
+  - service: mqtt.publish
+    data_template:
+      topic: "guirlande/cmd"
+      payload: >
+        [ { "repeat": 1000, "red": 0, "blue": 255, "green": 0, "speed":1},
+          { "repeat": 1000, "red": 255, "blue": 255, "green": 255, "speed":1},
+          { "repeat": 1000, "red": 255, "blue": 0, "green": 0, "speed":1}
+        ]
+
+  

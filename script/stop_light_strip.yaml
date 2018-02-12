@@ -1,0 +1,8 @@
+alias: Eteind guirlande
+sequence:
+  - service: mqtt.publish
+    data:
+      topic: "guirlande/cmdabs"
+      payload: "[]"
+
+  

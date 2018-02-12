@@ -1,0 +1,12 @@
+script.red_light_strip:
+  icon: mdi:lightbulb
+  google_assistant_name: guirlande rouge
+  google_assistant_type: light
+script.bbr_light_strip:
+  icon: mdi:lightbulb
+  google_assistant_name: guirlande bleu 
+  google_assistant_type: light
+script.stop_light_strip:
+  icon: mdi:lightbulb
+
+

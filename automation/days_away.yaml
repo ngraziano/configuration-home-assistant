@@ -1,4 +1,5 @@
-- alias: "Recup day away"
+- id: day_away_read
+  alias: "Recup day away"
   trigger:
     platform: mqtt
     topic: "heating/zone-a/antifreeze-duration"
@@ -7,7 +8,8 @@
     entity_id: input_number.days_away
     data_template:
       value: "{{ trigger.payload }}"
-- alias: "Send day away"
+- id: day_away_set
+  alias: "Send day away"
   trigger:
     platform: state
     entity_id: input_number.days_away

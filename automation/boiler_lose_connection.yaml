@@ -1,4 +1,5 @@
-- alias: "connection with boiler lost"
+- id: lose_boiler_com
+  alias: "connection with boiler lost"
   trigger:
     platform: mqtt
     topic: "heating/reading-lost"

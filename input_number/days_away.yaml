@@ -1,6 +1,5 @@
 name: Nb jours de vacances
-initial: 5
-min: 1
+min: 0
 max: 80
 step: 1
 #icon: mdi:temperature-celsius
