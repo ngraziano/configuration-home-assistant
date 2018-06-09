@@ -7,7 +7,7 @@
     entity_id: input_select.therm_program
     data_template:
       option: "{{ states.input_select.therm_program.attributes.options[trigger.payload|int] }}"
-- alias: "Send day target"
+- alias: "Send current program"
   trigger:
     platform: state
     entity_id: input_select.therm_program

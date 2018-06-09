@@ -75,6 +75,14 @@ binary_sensor:
     payload_off: false
     device_class: motion
 
+light:
+  - platform: mqtt
+    name: "Lumiere imprimante 3D"
+    command_topic: "octoprint/light/cmd"
+    payload_on: "1"
+    payload_off: "0"
+    qos: 2
+    
 
 input_boolean:
   notify_home:
@@ -94,6 +102,8 @@ camera:
   name: Camera de test
   username: !secret camera_user 
   password: !secret camera_password 
+
+config:
 
 
 notify:
@@ -178,6 +188,7 @@ group:
     view: yes
     entities:
       - group.temperature3D
+      - light.lumiere_imprimante_3d
   divers:
     view: yes
     entities:
@@ -257,12 +268,23 @@ google_assistant:
   project_id: home-assistant-push-gzo
   client_id: !secret google_assistant_client_id
   access_token: !secret google_assistant_access_token
+  api_key: !secret google_api_key
   exposed_domains:
     - switch
     - light
     - script
 #    - group
-    
+  entity_config:
+    script.red_light_strip:
+      name: guirlande rouge
+      # type: light
+    script.bbr_light_strip:
+      name: guirlande bleu
+      # type: light
+    script.stop_light_strip:
+      name: guirlande stop
+
+
 # microsoft_face:
 #   api_key: !secret cognitive_api_key
 

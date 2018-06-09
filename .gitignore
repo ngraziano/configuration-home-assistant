@@ -7,5 +7,6 @@ html5_push_registrations.conf
 *.db
 *.log
 *.swp
+*.old
 .HA_VERSION
 .uuid
