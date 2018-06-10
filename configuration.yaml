@@ -117,6 +117,7 @@ notify:
 group:
   default_view:
     view: yes
+    icon: mdi:home
     entities:
       - sun.sun
       - sensor.yr_symbol
@@ -126,6 +127,7 @@ group:
       - device_tracker.nico_n7ot
       - binary_sensor.ejp
   general:
+    name: Général
     entities:
       - sensor.temperature_exterieure
       - sensor.temperature_interieure
@@ -136,7 +138,7 @@ group:
       - configurator.tv_salon
   chaudiere:
     control: hidden
-#    view: yes
+    name: Chaudière
     entities:
       - sensor.temperature_retour
       - sensor.temperature_depart
@@ -151,6 +153,7 @@ group:
       - sensor.vitesse_ventilateur
   thermostat:
     control: hidden
+    name: Thermostat
     entities:
       - sensor.mode_chauffage
       - input_select.therm_program
