@@ -22,7 +22,15 @@ homeassistant:
 updater:
   include_used_components: true
 
-cloud:
+mqtt_eventstream:
+  publish_topic: ha_es/master/topic
+  subscribe_topic: ha_es/slaves/#
+  ignore_event:
+    - call_service
+    - state_changed
+
+
+# cloud:
 
 # View all events in a logbook
 logbook:
@@ -30,6 +38,13 @@ logbook:
 recorder:
   purge_interval: 5
   purge_keep_days: 70
+
+
+# volkswagen_carnet:
+#   username: !secret vw_username
+#   password: !secret vw_password
+#   update_interval: 
+#     minutes: 60
 
 # Prediction of weather
 sensor: !include_dir_merge_list sensor/
@@ -92,11 +107,6 @@ input_boolean:
     initial: off
     icon: mdi:car
 
-media_player:
-  platform: braviatv
-  host: 192.168.0.205
-  name: TV Salon
-#  scan_interval: 60
 
 camera:
   platform: generic
@@ -217,6 +227,46 @@ group:
     entities:
       - group.guirlande
       - group.capteurchambre
+
+  volkswagendashboard:
+    name: Volkswagen
+    view: yes
+    icon: mdi:car
+    entities:
+      - group.volkswagenswitches
+      - group.volkswagensensors
+      - group.volkswagenlocation
+  volkswagenswitches:
+    name: Volkswagen Switches
+    control: hidden
+    entities:
+      - switch.wvwzzzauzj8905986_charging
+      - switch.wvwzzzauzj8905986_climatisation
+      - switch.wvwzzzauzj8905986_window_heater
+      - lock.wvwzzzauzj8905986_doors_locked
+      - lock.wvwzzzauzj8905986_trunk_locked
+  volkswagensensors:
+    name: Volkswagen Information
+    control: hidden
+    entities:
+      - sensor.wvwzzzauzj8905986_battery_level
+      - sensor.wvwzzzauzj8905986_fuel_level
+      - sensor.wvwzzzauzj8905986_charging_time_left
+      - sensor.wvwzzzauzj8905986_odometer
+      - sensor.wvwzzzauzj8905986_electric_range
+      - sensor.wvwzzzauzj8905986_combustion_range
+      - sensor.wvwzzzauzj8905986_combined_range
+      - sensor.wvwzzzauzj8905986_last_connected
+      - sensor.wvwzzzauzj8905986_service_inspection
+      - sensor.wvwzzzauzj8905986_climatisation_target_temperature
+      - binary_sensor.wvwzzzauzj8905986_parking_light
+      - binary_sensor.wvwzzzauzj8905986_external_power
+      - binary_sensor.wvwzzzauzj8905986_climatisation_without_external_power  
+  volkswagenlocation:
+    name: Volkswagen Location
+    control: hidden
+    entities:
+      - device_tracker.wvwzzzauzj8905986
   system:
     view: yes
     control: hidden
@@ -269,25 +319,25 @@ influxdb:
       - input_select.therm_mode
 
 
-google_assistant:
-  project_id: home-assistant-push-gzo
-  client_id: !secret google_assistant_client_id
-  access_token: !secret google_assistant_access_token
-  api_key: !secret google_api_key
-  exposed_domains:
-    - switch
-    - light
-    - script
+#google_assistant:
+#  project_id: home-assistant-push-gzo
+#  client_id: !secret google_assistant_client_id
+#  access_token: !secret google_assistant_access_token
+#  api_key: !secret google_api_key
+#  exposed_domains:
+#    - switch
+#    - light
+#    - script
 #    - group
-  entity_config:
-    script.red_light_strip:
-      name: guirlande rouge
+#  entity_config:
+#    script.red_light_strip:
+#      name: guirlande rouge
       # type: light
-    script.bbr_light_strip:
-      name: guirlande bleu
+#    script.bbr_light_strip:
+#      name: guirlande bleu
       # type: light
-    script.stop_light_strip:
-      name: guirlande stop
+#    script.stop_light_strip:
+#      name: guirlande stop
 
 
 # microsoft_face:
