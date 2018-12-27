@@ -319,14 +319,12 @@ influxdb:
       - input_select.therm_mode
 
 
-#google_assistant:
-#  project_id: home-assistant-push-gzo
-#  client_id: !secret google_assistant_client_id
-#  access_token: !secret google_assistant_access_token
-#  api_key: !secret google_api_key
-#  exposed_domains:
-#    - switch
-#    - light
+google_assistant:
+  project_id: home-assistant-push-gzo
+  api_key: !secret google_api_key
+  exposed_domains:
+    - switch
+    - light
 #    - script
 #    - group
 #  entity_config:
