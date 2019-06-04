@@ -29,6 +29,7 @@ mqtt_eventstream:
     - call_service
     - state_changed
 
+system_health:
 
 # cloud:
 
@@ -99,7 +100,21 @@ light:
     payload_on: "1"
     payload_off: "0"
     qos: 2
-    
+
+climate:
+  - platform: mqtt
+    name: "Chauffage central"
+    temperature_command_topic: "heating/zone-a/day-target-temperaturei/SET"
+    temperature_state_topic: "heating/zone-a/day-target-temperature"
+    temp_step: 0.5
+    current_temperature_topic: "heating/zone-a/temperature"
+    mode_state_topic: "heating/zone-a/mode-simple"
+    mode_command_topic: "heating/zone-a/mode-simple/SET"
+    modes:
+      - Automatique
+      - Jour
+      - Nuit
+      - Vacances
 
 input_boolean:
   notify_home:
@@ -107,6 +122,10 @@ input_boolean:
     initial: off
     icon: mdi:car
 
+media_player:
+  platform: braviatv
+  host: 192.168.0.205
+  name: TV Salon
 
 camera:
   platform: generic
@@ -121,8 +140,9 @@ config:
 notify:
   name: HTML5
   platform: html5
-  gcm_api_key: !secret gcm_api_key
-  gcm_sender_id: !secret gcm_sender_id
+  vapid_pub_key: !secret vapid_pub_key 
+  vapid_prv_key: !secret vapid_prv_key
+  vapid_email: !secret vapid_email
 
 group:
   default_view:
@@ -144,8 +164,8 @@ group:
       - binary_sensor.ejp
       - binary_sensor.ejp_lendemain
       - binary_sensor.lave_linge
+      - climate.chauffage_central
       - media_player.tv_salon
-      - configurator.tv_salon
   chaudiere:
     control: hidden
     name: Chaudière
@@ -218,8 +238,8 @@ group:
     control: hidden
     name: capteurs
     entities:
-      - sensor.luminosite_chambre
-      - sensor.temperature_chambre
+#      - sensor.luminosite_chambre
+#      - sensor.temperature_chambre
       - binary_sensor.mouvement_chambre
       - binary_sensor.porte_chambre
   chambre:
@@ -292,7 +312,12 @@ device_tracker:
   platform: owntracks
   max_gps_accuracy: 200
 
-http: !include private/http.yaml
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.17.0.1
+    - 127.0.0.1
+    - ::1
 
 mqtt: !include private/mqtt.yaml
 
@@ -318,6 +343,8 @@ influxdb:
       - input_select.therm_program
       - input_select.therm_mode
 
+shell_command:
+  start_tv: !secret wakeonlantv
 
 google_assistant:
   project_id: home-assistant-push-gzo
@@ -325,6 +352,8 @@ google_assistant:
   exposed_domains:
     - switch
     - light
+    - climate
+    - media_player
 #    - script
 #    - group
 #  entity_config:

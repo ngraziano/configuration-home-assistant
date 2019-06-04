@@ -1,16 +1,16 @@
 
 # Freebox info
 
-- platform: mqtt
-  state_topic: "zwave/node/7/user/Temperature"
-  name: "Temperature chambre"
-  value_template: '{{ value_json.value }}'
-  unit_of_measurement: "°C"
+# - platform: mqtt
+#   state_topic: "zwave/node/7/user/Temperature"
+#   name: "Temperature chambre"
+#   value_template: '{{ value_json.value }}'
+#   unit_of_measurement: "°C"
 
-- platform: mqtt
-  state_topic: "zwave/node/7/user/Luminance"
-  name: "Luminosite chambre"
-  value_template: '{{ value_json.value }}'
-  unit_of_measurement: "%"
+# - platform: mqtt
+#   state_topic: "zwave/node/7/user/Luminance"
+#   name: "Luminosite chambre"
+#   value_template: '{{ value_json.value }}'
+#   unit_of_measurement: "%"
 
 

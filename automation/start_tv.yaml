@@ -1,0 +1,11 @@
+- alias: start TV
+  trigger:
+    - platform: event
+      event_type: call_service
+      event_data:
+        domain: media_player
+        entity_id: tv_salon
+        service: turn_on
+  action:
+    service: shell_command.start_tv 
+
