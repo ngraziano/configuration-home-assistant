@@ -99,6 +99,10 @@ light:
     command_topic: "octoprint/light/cmd"
     payload_on: "1"
     payload_off: "0"
+    state_topic: "octoprint/light/state"
+    brightness_command_topic: "octoprint/light/brightcmd"
+    brightness_state_topic: "octoprint/light/bright"
+    brightness_scale: 100
     qos: 2
 
 climate:
@@ -233,7 +237,7 @@ group:
     control: hidden
     entities:
       - script.red_light_strip
-      - script.stop_light_strip 
+      - script.stop_light_strip
   capteurchambre:
     control: hidden
     name: capteurs
