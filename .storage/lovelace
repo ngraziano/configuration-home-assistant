@@ -1,0 +1,253 @@
+{
+    "data": {
+        "config": {
+            "title": "Maison",
+            "views": [
+                {
+                    "badges": [
+                        "sensor.yr_symbol",
+                        "sun.sun"
+                    ],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.temperature_exterieure"
+                                },
+                                {
+                                    "entity": "sensor.temperature_interieure"
+                                },
+                                {
+                                    "entity": "binary_sensor.lave_linge"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "G\u00e9n\u00e9ral",
+                            "type": "entities"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.mode_chauffage"
+                                        }
+                                    ],
+                                    "show_header_toggle": false,
+                                    "type": "entities"
+                                },
+                                {
+                                    "entity": "climate.chauffage_central",
+                                    "type": "thermostat"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "switch.chaudiere_program_p1",
+                                            "name": "P1",
+                                            "tap_action": {
+                                                "action": "toggle"
+                                            }
+                                        },
+                                        {
+                                            "entity": "switch.chaudiere_program_p2",
+                                            "name": "P2",
+                                            "tap_action": {
+                                                "action": "toggle"
+                                            }
+                                        },
+                                        {
+                                            "entity": "switch.chaudiere_program_p3",
+                                            "name": "P3",
+                                            "tap_action": {
+                                                "action": "toggle"
+                                            }
+                                        },
+                                        {
+                                            "entity": "switch.chaudiere_program_p4",
+                                            "name": "P4",
+                                            "tap_action": {
+                                                "action": "toggle"
+                                            }
+                                        }
+                                    ],
+                                    "type": "glance"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        }
+                    ],
+                    "icon": "mdi:home",
+                    "path": "default_view",
+                    "title": "default_view"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                "sensor.temperature_retour",
+                                "sensor.temperature_depart",
+                                "sensor.temperature_interieure",
+                                "sensor.heures_de_fonctionement",
+                                "sensor.nombre_de_demarage",
+                                "sensor.temperature_calculee_chaudiere",
+                                "sensor.temperature_calculee_interieur",
+                                "sensor.pression_circuit_chauffage",
+                                "sensor.pompe",
+                                "sensor.puissance_bruleur",
+                                "sensor.vitesse_ventilateur"
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Chaudi\u00e8re",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "sensor.synchro_freebox_up",
+                                "sensor.synchro_freebox_down"
+                            ],
+                            "show_header_toggle": true,
+                            "title": "internet",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "sensor.n7battery_level",
+                                "sensor.n9battery_level",
+                                "sensor.n12battery_level"
+                            ],
+                            "show_header_toggle": true,
+                            "title": "Batterie ZWave",
+                            "type": "entities"
+                        }
+                    ],
+                    "path": "technique",
+                    "title": "technique"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                "sensor.temperature_extrudeur",
+                                "sensor.temperature_garage"
+                            ],
+                            "show_header_toggle": true,
+                            "title": "Temp\u00e9ratures",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "light.imprimante_3d"
+                            ],
+                            "title": "Lumi\u00e8re",
+                            "type": "entities"
+                        }
+                    ],
+                    "path": "imprimante3d",
+                    "title": "imprimante3D"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entity": "camera.camera_de_test",
+                            "type": "picture-entity"
+                        },
+                        {
+                            "entities": [
+                                "input_boolean.notify_home"
+                            ],
+                            "title": "Entr\u00e9e logique",
+                            "type": "entities"
+                        }
+                    ],
+                    "path": "divers",
+                    "title": "divers"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                "script.red_light_strip",
+                                "script.stop_light_strip"
+                            ],
+                            "show_header_toggle": false,
+                            "title": "guirlande",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "binary_sensor.mouvement_chambre",
+                                "binary_sensor.porte_chambre"
+                            ],
+                            "show_header_toggle": false,
+                            "title": "capteurs",
+                            "type": "entities"
+                        }
+                    ],
+                    "path": "chambre",
+                    "title": "chambre"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                "switch.wvwzzzauzj8905986_charging",
+                                "switch.wvwzzzauzj8905986_climatisation",
+                                "switch.wvwzzzauzj8905986_window_heater",
+                                "lock.wvwzzzauzj8905986_doors_locked",
+                                "lock.wvwzzzauzj8905986_trunk_locked"
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Volkswagen Switches",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "sensor.wvwzzzauzj8905986_battery_level",
+                                "sensor.wvwzzzauzj8905986_fuel_level",
+                                "sensor.wvwzzzauzj8905986_charging_time_left",
+                                "sensor.wvwzzzauzj8905986_odometer",
+                                "sensor.wvwzzzauzj8905986_electric_range",
+                                "sensor.wvwzzzauzj8905986_combustion_range",
+                                "sensor.wvwzzzauzj8905986_combined_range",
+                                "sensor.wvwzzzauzj8905986_last_connected",
+                                "sensor.wvwzzzauzj8905986_service_inspection",
+                                "sensor.wvwzzzauzj8905986_climatisation_target_temperature",
+                                "binary_sensor.wvwzzzauzj8905986_parking_light",
+                                "binary_sensor.wvwzzzauzj8905986_external_power",
+                                "binary_sensor.wvwzzzauzj8905986_climatisation_without_external_power"
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Volkswagen Information",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "device_tracker.wvwzzzauzj8905986"
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Volkswagen Location",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:car",
+                    "path": "volkswagendashboard",
+                    "title": "Volkswagen"
+                },
+                {
+                    "badges": [],
+                    "cards": [],
+                    "path": "system",
+                    "title": "system"
+                }
+            ]
+        }
+    },
+    "key": "lovelace",
+    "version": 1
+}
