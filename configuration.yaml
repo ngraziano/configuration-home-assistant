@@ -22,12 +22,12 @@ homeassistant:
 updater:
   include_used_components: true
 
-mqtt_eventstream:
-  publish_topic: ha_es/master/topic
-  subscribe_topic: ha_es/slaves/#
-  ignore_event:
-    - call_service
-    - state_changed
+#mqtt_eventstream:
+#  publish_topic: ha_es/master/topic
+#  subscribe_topic: ha_es/slaves/#
+#  ignore_event:
+#    - call_service
+#    - state_changed
 
 system_health:
 
@@ -37,17 +37,17 @@ system_health:
 logbook:
 
 recorder:
-  purge_interval: 5
-  purge_keep_days: 70
+  purge_interval: 1
+  purge_keep_days: 10
 
-
-# volkswagen_carnet:
-#   username: !secret vw_username
-#   password: !secret vw_password
-#   update_interval: 
-#     minutes: 60
+weather:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    
 
 # Prediction of weather
+
+
 sensor: !include_dir_merge_list sensor/
 
 switch: !include_dir_merge_list switch/
@@ -110,6 +110,8 @@ climate:
     name: "Chauffage central"
     temperature_command_topic: "heating/zone-a/day-target-temperaturei/SET"
     temperature_state_topic: "heating/zone-a/day-target-temperature"
+#    temperature_low_state_topic: "heating/zone-a/night-target-temperature"
+#    temperature_low_command_topic: "heating/zone-a/night-target-temperature/SET"
     temp_step: 0.5
     current_temperature_topic: "heating/zone-a/temperature"
     mode_state_topic: "heating/zone-a/mode-simple"

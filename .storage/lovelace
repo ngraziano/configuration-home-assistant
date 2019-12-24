@@ -26,6 +26,11 @@
                             "type": "entities"
                         },
                         {
+                            "entity": "weather.dark_sky",
+                            "name": " ",
+                            "type": "weather-forecast"
+                        },
+                        {
                             "cards": [
                                 {
                                     "entities": [
@@ -71,6 +76,7 @@
                                             }
                                         }
                                     ],
+                                    "show_state": false,
                                     "type": "glance"
                                 }
                             ],
@@ -107,18 +113,45 @@
                                 "sensor.synchro_freebox_up",
                                 "sensor.synchro_freebox_down"
                             ],
-                            "show_header_toggle": true,
+                            "show_header_toggle": false,
                             "title": "internet",
                             "type": "entities"
                         },
                         {
                             "entities": [
-                                "sensor.n7battery_level",
-                                "sensor.n9battery_level",
-                                "sensor.n12battery_level"
+                                {
+                                    "entity": "binary_sensor.detect_mouv_1_contact"
+                                },
+                                {
+                                    "entity": "sensor.detect_mouv_1_battery"
+                                },
+                                {
+                                    "entity": "binary_sensor.nodeid_5_contact"
+                                },
+                                {
+                                    "entity": "sensor.nodeid_5_alarm_burglar"
+                                },
+                                {
+                                    "entity": "sensor.nodeid_5_alarm_level"
+                                },
+                                {
+                                    "entity": "sensor.nodeid_5_alarm_type"
+                                },
+                                {
+                                    "entity": "sensor.nodeid_5_battery"
+                                },
+                                {
+                                    "entity": "sensor.nodeid_5_humidity"
+                                },
+                                {
+                                    "entity": "sensor.nodeid_5_illuminance"
+                                },
+                                {
+                                    "entity": "sensor.nodeid_5_temperature"
+                                }
                             ],
-                            "show_header_toggle": true,
-                            "title": "Batterie ZWave",
+                            "show_header_toggle": false,
+                            "title": "Zwave",
                             "type": "entities"
                         }
                     ],
@@ -133,16 +166,13 @@
                                 "sensor.temperature_extrudeur",
                                 "sensor.temperature_garage"
                             ],
-                            "show_header_toggle": true,
+                            "show_header_toggle": false,
                             "title": "Temp\u00e9ratures",
                             "type": "entities"
                         },
                         {
-                            "entities": [
-                                "light.imprimante_3d"
-                            ],
-                            "title": "Lumi\u00e8re",
-                            "type": "entities"
+                            "entity": "light.imprimante_3d",
+                            "type": "light"
                         }
                     ],
                     "path": "imprimante3d",
@@ -180,8 +210,12 @@
                         },
                         {
                             "entities": [
-                                "binary_sensor.mouvement_chambre",
-                                "binary_sensor.porte_chambre"
+                                {
+                                    "entity": "sensor.sh_7a30e1_power"
+                                },
+                                {
+                                    "entity": "switch.sh_7a30e1_state"
+                                }
                             ],
                             "show_header_toggle": false,
                             "title": "capteurs",
@@ -195,55 +229,45 @@
                     "badges": [],
                     "cards": [
                         {
-                            "entities": [
-                                "switch.wvwzzzauzj8905986_charging",
-                                "switch.wvwzzzauzj8905986_climatisation",
-                                "switch.wvwzzzauzj8905986_window_heater",
-                                "lock.wvwzzzauzj8905986_doors_locked",
-                                "lock.wvwzzzauzj8905986_trunk_locked"
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Volkswagen Switches",
-                            "type": "entities"
+                            "entity": "sensor.dark_sky_precip_probability_0d",
+                            "max": 100,
+                            "min": 0,
+                            "name": "Pluie aujoud'hui",
+                            "severity": {
+                                "green": 0,
+                                "red": 0,
+                                "yellow": 0
+                            },
+                            "theme": "default",
+                            "type": "gauge"
                         },
                         {
-                            "entities": [
-                                "sensor.wvwzzzauzj8905986_battery_level",
-                                "sensor.wvwzzzauzj8905986_fuel_level",
-                                "sensor.wvwzzzauzj8905986_charging_time_left",
-                                "sensor.wvwzzzauzj8905986_odometer",
-                                "sensor.wvwzzzauzj8905986_electric_range",
-                                "sensor.wvwzzzauzj8905986_combustion_range",
-                                "sensor.wvwzzzauzj8905986_combined_range",
-                                "sensor.wvwzzzauzj8905986_last_connected",
-                                "sensor.wvwzzzauzj8905986_service_inspection",
-                                "sensor.wvwzzzauzj8905986_climatisation_target_temperature",
-                                "binary_sensor.wvwzzzauzj8905986_parking_light",
-                                "binary_sensor.wvwzzzauzj8905986_external_power",
-                                "binary_sensor.wvwzzzauzj8905986_climatisation_without_external_power"
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Volkswagen Information",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                "device_tracker.wvwzzzauzj8905986"
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Volkswagen Location",
-                            "type": "entities"
+                            "entity": "sensor.dark_sky_precip_probability_1d",
+                            "max": 100,
+                            "min": 0,
+                            "name": "Pluie demain",
+                            "severity": {
+                                "green": 0,
+                                "red": 0,
+                                "yellow": 0
+                            },
+                            "theme": "default",
+                            "type": "gauge"
                         }
                     ],
-                    "icon": "mdi:car",
-                    "path": "volkswagendashboard",
-                    "title": "Volkswagen"
+                    "panel": false,
+                    "path": "system",
+                    "title": "M\u00e9t\u00e9o"
                 },
                 {
                     "badges": [],
-                    "cards": [],
-                    "path": "system",
-                    "title": "system"
+                    "cards": [
+                        {
+                            "entity": "media_player.tv_salon",
+                            "type": "media-control"
+                        }
+                    ],
+                    "title": "Salon"
                 }
             ]
         }
