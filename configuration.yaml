@@ -12,6 +12,8 @@ homeassistant:
 
   customize: !include_dir_merge_named customize
 
+mobile_app:
+
 # Discover some devices automatically
 # discovery:
 
@@ -312,11 +314,11 @@ history:
 frontend:
 
 # Allows you to issue voice commands from the frontend
-conversation:
+# conversation:
 
-device_tracker:
-  platform: owntracks
-  max_gps_accuracy: 200
+freebox:
+  host: !secret freeboxhost 
+  port: !secret freeboxport
 
 http:
   use_x_forwarded_for: true
@@ -354,7 +356,7 @@ shell_command:
 
 google_assistant:
   project_id: home-assistant-push-gzo
-  api_key: !secret google_api_key
+  service_account: !include private/google-service.json
   exposed_domains:
     - switch
     - light

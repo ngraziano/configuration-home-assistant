@@ -110,8 +110,18 @@
                         },
                         {
                             "entities": [
-                                "sensor.synchro_freebox_up",
-                                "sensor.synchro_freebox_down"
+                                {
+                                    "entity": "sensor.synchro_freebox_up"
+                                },
+                                {
+                                    "entity": "sensor.synchro_freebox_down"
+                                },
+                                {
+                                    "entity": "sensor.freebox_download_speed"
+                                },
+                                {
+                                    "entity": "sensor.freebox_upload_speed"
+                                }
                             ],
                             "show_header_toggle": false,
                             "title": "internet",
@@ -152,6 +162,21 @@
                             ],
                             "show_header_toggle": false,
                             "title": "Zwave",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.sh_7a30e1_internaltemperature"
+                                },
+                                {
+                                    "entity": "sensor.sh_b8675a_internaltemperature"
+                                },
+                                {
+                                    "entity": "sensor.sh_b86849_internaltemperature"
+                                }
+                            ],
+                            "title": "Shellies",
                             "type": "entities"
                         }
                     ],
@@ -268,6 +293,24 @@
                         }
                     ],
                     "title": "Salon"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "device_tracker.oneplus_a5010"
+                                },
+                                {
+                                    "entity": "zone.home"
+                                }
+                            ],
+                            "type": "map"
+                        }
+                    ],
+                    "path": "carto",
+                    "title": "Carto"
                 }
             ]
         }
